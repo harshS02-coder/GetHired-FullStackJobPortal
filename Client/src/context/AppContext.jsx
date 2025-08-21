@@ -50,7 +50,7 @@ export const AppContextProvider = (props) =>{
     const fetchCompanyData = async () =>{
         try {
             
-            const {data} = await axios.get(backendUrl+'/api/company/company', {headers:{token:companyToken}})
+            const {data} = await axios.get(backendUrl+'/api/company/company', {headers: { Authorization: `Bearer ${companyToken}`}})
 
             if(data.success){
                 setCompanyData(data.company)

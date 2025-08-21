@@ -18,7 +18,7 @@ const ManageJobs = ()=>{
 
         try {
             
-            const {data} = await axios.get(backendUrl+'/api/company/manage-jobs', {headers:{token:companyToken}})
+            const {data} = await axios.get(backendUrl+'/api/company/manage-jobs', { headers: { Authorization: `Bearer ${companyToken}` } })
 
             if(data.success){
                 console.log(data.jobsData)

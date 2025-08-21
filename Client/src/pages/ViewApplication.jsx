@@ -15,7 +15,7 @@ const ViewApplication = () => {
     const fetchCompanyJobApplications = async () => {
 
         try {
-            const { data } = await axios.get(backendUrl + '/api/company/applicants', { headers: { token: companyToken } })
+            const { data } = await axios.get(backendUrl + '/api/company/applicants', { headers: { Authorization: `Bearer ${companyToken}`}})
 
             if (data.success) {
                 setAppllicants(data.applicants.reverse())

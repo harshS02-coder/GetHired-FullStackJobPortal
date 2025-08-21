@@ -4,7 +4,11 @@ import { assets } from '../assets/assets';
 const Footer = () => {
   return (
     <div className='container h-100 px-4 2xl:px-20 mx-auto flex items-center justify-between gap-4 py-3 mt-3'>
-      <img src={assets.getHired} />
+      <img src={assets.getHired} className="h-50 sm:h-10 md:h-12 w- object-contain"
+          style={{
+            maxWidth: '180px',
+            minHeight: '32px'
+          }} />
       <p className='flex-1 border-1 border-gray-100 pl-4 text-gray-500 max-sm:hidden'> Copyright @Harsh.dev | All right reserved.</p>
       <div className='flex items-center justify-between gap-2'>
         <a href="#" target="_blank" rel="noopener noreferrer">

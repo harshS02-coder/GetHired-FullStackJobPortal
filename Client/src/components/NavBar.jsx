@@ -72,7 +72,11 @@ return (
         <img
           src={assets.getHired}
           alt="GetHired"
-          className="h-12 w-auto"
+          className="h-50 sm:h-10 md:h-12 w- object-contain"
+          style={{
+            maxWidth: '180px',
+            minHeight: '32px'
+          }}
         />
       </div>
 
