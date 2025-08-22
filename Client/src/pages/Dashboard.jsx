@@ -1,3 +1,5 @@
+//dashboard
+
 import React, { useContext, useEffect } from 'react'
 import NavBar from '../components/NavBar';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -29,8 +31,12 @@ const Dashboard = () => {
         <div className='min-h-screen'>
 
             <div className='shadow py-2'>
-                <div className='px-5 flex justify-between items-center'>
-                    <img onClick={e => navigate('/')} className='max-sm:w-32  cursor-pointer' src={assets.getHired} />
+                <div className='px-6 flex justify-between items-center'>
+                    <img onClick={e => navigate('/')} className="h-50 sm:h-10 md:h-12 w- object-contain"
+                    style={{
+                        maxWidth: '180px',
+                        minHeight: '32px'
+                    }} src={assets.getHired} />
                     {companyData &&
                         <div className='flex items-center gap-3'>
                             <p className='max-sm:hidden mr-0'>Welcome, {companyData.name}</p>
