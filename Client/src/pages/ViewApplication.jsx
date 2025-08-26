@@ -31,7 +31,7 @@ const ViewApplication = () => {
 
     const changeApplicationStatus = async (id, status) => {
         try {
-            const { data } = await axios.post(backendUrl + '/api/company/change-status', { id, status }, { headers: { token: companyToken } })
+            const { data } = await axios.post(backendUrl + '/api/company/change-status', { id, status }, { headers: { Authorization: `Bearer ${companyToken}`} })
 
             if (data.success) {
                 fetchCompanyJobApplications()
