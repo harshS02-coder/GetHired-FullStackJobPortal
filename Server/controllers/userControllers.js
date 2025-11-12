@@ -6,8 +6,7 @@ import {v2 as cloudinary } from 'cloudinary'
 
 //get user's data
 export const getUserData = async (req, res) => {
-    const { userId: clerkUserId } = req.auth(); 
-    console.log("Clerk ID:", clerkUserId);
+    const clerkUserId = req.auth.userId; 
   
     try {
       const user = await User.findOne({ clerkId: clerkUserId }); 
@@ -132,37 +131,20 @@ export const updateUserProfile = async (req, res) => {
         });
       }
   
-      // if (resumeFile) {
-      //   const resumeUpload = await cloudinary.uploader.upload(resumeFile.path, {
-      //     folder: "resumes",
-      //     resource_type: "raw", 
-      //   });
-      //   userData.resume = resumeUpload.secure_url;
-      // }
-
-      //directly to database
-         let resumeDataUrl; // declare it outside
-
-          if (resumeFile) {
-            // Convert file buffer to base64
-            const resumeBase64 = resumeFile.buffer.toString("base64");
-
-            // Create data URL (just like your image)
-            resumeDataUrl = `data:${resumeFile.mimetype};base64,${resumeBase64}`;
-
-            // Save in DB (only URL string)
-            userData.resume = resumeDataUrl;
-          }
+      if (resumeFile) {
+        const resumeUpload = await cloudinary.uploader.upload(resumeFile.path, {
+          folder: "resumes",
+          resource_type: "raw", 
+        });
+        userData.resume = resumeUpload.secure_url;
+      }
   
       await userData.save();
-
-      // const resumeDataUrl = `data:${userData.resume.contentType};base64,${userData.resume.data.toString("base64")}`;
   
       res.json({
         success: true,
         message: "Resume Updated",
-        // resume: userData.resume,
-        resume : userData.resume || null
+        resume: userData.resume,
       });
     } catch (error) {
       console.error("Error in updateUserProfile:", error);

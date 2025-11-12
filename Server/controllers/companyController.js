@@ -1,7 +1,7 @@
 import Company from "../models/Company.js";
 import Jobs from "../models/Jobs.js";
 import bcrypt from 'bcrypt'
-import cloudinary  from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 import generateToken from "../utils/generateToken.js";
 import { promises } from "fs";
 import Application from '../models/JobApplications.js'
@@ -27,47 +27,14 @@ export const registerCompany = async (req, res) => {
         const round = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(password, round);
 
-        //directly to database
-
-        const imageBase64 = imageFile.buffer.toString('base64');
-        const imageData = {
-            data: imageBase64,
-            contentType: imageFile.mimetype
-        };
-
-        const imageDataUrl = `data:${imageData.contentType};base64,${imageData.data}`;
-
-        //const imageUpload = await cloudinary.uploader.upload(imageFile.path);
-        //const imageUrl = imageFile.path;
-
-        // upload to Cloudinary (using buffer)
-        // const result = await new Promise((resolve, reject) => {
-        //     const stream = cloudinary.uploader.upload_stream(
-        //         { folder: "company_uploads", resource_type: "auto" },
-        //         (error, result) => {
-        //             if (error) reject(error);
-        //             else resolve(result);
-        //         }
-        //     );
-        //     stream.end(imageFile.buffer); // pass buffer instead of path
-        // });
-
-        // console.log("Image URL:", result?.secure_url);
-        //  if (!result?.secure_url) {
-        //     return res.json({
-        //         success: false,
-        //         message: "Cloudinary upload failed, no image URL returned",
-        //     });
-        // }
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path);
 
         const company = await Company.create({
             name,
             email,
             password: hashedPass,
-            //image: imageUpload.secure_url
-            image : imageDataUrl
-            //image : result.secure_url
-            });
+            image: imageUpload.secure_url
+        });
 
         res.json({
             success: true,
