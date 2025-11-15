@@ -1,10 +1,27 @@
+//import redis from '../config/redis.js'
 import Jobs from '../models/Jobs.js'
 
 export const getAllJobs = async(req,res) =>{
 
+    //first try hitting cache 
     try {
-        const jobs = await Jobs.find({visibility : true}).populate({path:'companyId', select :'-password'})
+        // const cachedJobs = await redis.get('all_jobs');
+
+        //   if (cachedJobs) {
+        //     console.log("Serving from cache");
+        //     return res.json({
+        //         success: true,
+        //         jobs: JSON.parse(cachedJobs)
+        //     });
+        // }
+        // console.log("Fetching from DB");
+        const jobs = await Jobs.find({visibility : true}).populate({path:'companyId', select :'-password'});
+        //store in cache for future requests
+
+        //await redis.set('all_jobs', JSON.stringify(jobs), 'EX', 300);
+        //await redis.set('all_jobs', JSON.stringify(jobs), 'EX', 300);
         res.json({success : true, jobs})
+        
     } catch (error) {
         res.json({
             success:false,
