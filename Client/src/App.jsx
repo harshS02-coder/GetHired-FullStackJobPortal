@@ -10,6 +10,8 @@ import Dashboard from './pages/Dashboard';
 import AddJobs from './pages/AddJobs';
 import ManageJobs from './pages/ManageJobs';
 import ViewApplication from './pages/ViewApplication';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import 'quill/dist/quill.snow.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -26,6 +28,11 @@ const App = () =>{
         <Route path='/' element={<Homes />} />
         <Route path='/applyjob/:id'  element={<ApplyJobs />} />
         <Route path='/applications' element={<Application />} />
+        <Route
+            path="/forgotpassword"
+            element={<ForgotPassword />}
+          />
+        <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path='/dashboard' element={<Dashboard/>}>
           {companyToken ? <>
             <Route path='addJobs' element={<AddJobs/>} />
