@@ -18,6 +18,10 @@ const RecruiterPage = () => {
 
   const {setShowRecruiterLogin, backendUrl, setCompanyData, setCompanyToken} = useContext(AppContext)
 
+  const handleForgotPassword = () => {
+  navigate("/forgotpassword");
+  setShowRecruiterLogin(false);
+  };
 
   const onSubmitHandler = async (e) =>{
     e.preventDefault()
@@ -129,7 +133,14 @@ const RecruiterPage = () => {
           </>
           }
 
-          {state === 'Login' && <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot Password</p>}
+          {state === 'Login' && (
+              <p
+                onClick={handleForgotPassword}
+                className="text-sm text-blue-600 my-4 cursor-pointer hover:underline"
+              >
+                Forgot Password?
+              </p>
+          )}
           
           
           {/* Submit Button */}
