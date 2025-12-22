@@ -145,59 +145,84 @@ const Dashboard = () => {
             {/* Sidebar Navigation */}
             <div className='inline-block min-h-screen border-r border-slate-200/60 bg-white/60 backdrop-blur-sm w-48 lg:w-56'>
                 <ul className='flex flex-col items-start pt-6 text-slate-800'>
-                    <NavLink 
-                        className={({ isActive }) => `flex items-center p-4 lg:px-6 w-full group transition-all duration-300 hover:bg-white/80 hover:shadow-md ${
-                            isActive 
-                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50/50 border-r-4 border-blue-500 shadow-sm' 
-                            : 'hover:border-r-2 hover:border-slate-300/60'
-                        }`} 
-                        to={'/dashboard/addJobs'}
-                    >
-                        <div className={`p-2 rounded-lg transition-all duration-300 group-hover:scale-110 ${
-                            isActive ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600'
-                        }`}>
-                            <img className='w-5 h-5' src={assets.add_icon} alt="Add Jobs" />
-                        </div>
-                        <p className='ml-3 font-medium text-sm lg:text-base max-sm:hidden transition-colors duration-300 group-hover:text-slate-900'>
-                            Add Jobs
-                        </p>
-                    </NavLink>
+                    <NavLink to="/dashboard/addJobs">
+                            {({ isActive }) => (
+                                <div
+                                    className={`flex items-center p-4 lg:px-6 w-full group transition-all duration-300 hover:bg-white/80 hover:shadow-md ${isActive
+                                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50/50 border-r-4 border-blue-500 shadow-sm'
+                                            : 'hover:border-r-2 hover:border-slate-300/60'
+                                        }`}
+                                >
+                                    <div
+                                        className={`p-2 rounded-lg transition-all duration-300 group-hover:scale-110 ${isActive
+                                                ? 'bg-blue-100 text-blue-600'
+                                                : 'bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600'
+                                            }`}
+                                    >
+                                        <img className="w-5 h-5" src={assets.add_icon} alt="Add Jobs" />
+                                    </div>
 
-                    <NavLink 
-                        className={({ isActive }) => `flex items-center p-4 lg:px-6 w-full group transition-all duration-300 hover:bg-white/80 hover:shadow-md ${
-                            isActive 
-                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50/50 border-r-4 border-blue-500 shadow-sm' 
-                            : 'hover:border-r-2 hover:border-slate-300/60'
-                        }`} 
-                        to={'/dashboard/manageJobs'}
-                    >
-                        <div className={`p-2 rounded-lg transition-all duration-300 group-hover:scale-110 ${
-                            isActive ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600'
-                        }`}>
-                            <img className='w-5 h-5' src={assets.home_icon} alt="Manage Jobs" />
-                        </div>
-                        <p className='ml-3 font-medium text-sm lg:text-base max-sm:hidden transition-colors duration-300 group-hover:text-slate-900'>
-                            Manage Jobs
-                        </p>
-                    </NavLink>
+                                    <p className="ml-3 font-medium text-sm lg:text-base max-sm:hidden transition-colors duration-300 group-hover:text-slate-900">
+                                        Add Jobs
+                                    </p>
+                                </div>
+                            )}
+                        </NavLink>
 
-                    <NavLink 
-                        className={({ isActive }) => `flex items-center p-4 lg:px-6 w-full group transition-all duration-300 hover:bg-white/80 hover:shadow-md ${
-                            isActive 
-                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50/50 border-r-4 border-blue-500 shadow-sm' 
-                            : 'hover:border-r-2 hover:border-slate-300/60'
-                        }`} 
-                        to={'/dashboard/viewApplications'}
-                    >
-                        <div className={`p-2 rounded-lg transition-all duration-300 group-hover:scale-110 ${
-                            isActive ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600'
-                        }`}>
-                            <img className='w-5 h-5' src={assets.person_tick_icon} alt="View Applications" />
-                        </div>
-                        <p className='ml-3 font-medium text-sm lg:text-base max-sm:hidden transition-colors duration-300 group-hover:text-slate-900'>
-                            View Applications
-                        </p>
-                    </NavLink>
+
+                        <NavLink to="/dashboard/manageJobs">
+                            {({ isActive }) => (
+                                <div
+                                    className={`flex items-center p-4 lg:px-6 w-full group transition-all duration-300 hover:bg-white/80 hover:shadow-md ${isActive
+                                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50/50 border-r-4 border-blue-500 shadow-sm'
+                                            : 'hover:border-r-2 hover:border-slate-300/60'
+                                        }`}
+                                >
+                                    <div
+                                        className={`p-2 rounded-lg transition-all duration-300 group-hover:scale-110 ${isActive
+                                                ? 'bg-blue-100 text-blue-600'
+                                                : 'bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600'
+                                            }`}
+                                    >
+                                        <img className="w-5 h-5" src={assets.home_icon} alt="Manage Jobs" />
+                                    </div>
+
+                                    <p className="ml-3 font-medium text-sm lg:text-base max-sm:hidden transition-colors duration-300 group-hover:text-slate-900">
+                                        Manage Jobs
+                                    </p>
+                                </div>
+                            )}
+                        </NavLink>
+
+
+                        <NavLink to="/dashboard/viewApplications">
+                            {({ isActive }) => (
+                                <div
+                                    className={`flex items-center p-4 lg:px-6 w-full group transition-all duration-300 hover:bg-white/80 hover:shadow-md ${isActive
+                                            ? 'bg-gradient-to-r from-blue-50 to-indigo-50/50 border-r-4 border-blue-500 shadow-sm'
+                                            : 'hover:border-r-2 hover:border-slate-300/60'
+                                        }`}
+                                >
+                                    <div
+                                        className={`p-2 rounded-lg transition-all duration-300 group-hover:scale-110 ${isActive
+                                                ? 'bg-blue-100 text-blue-600'
+                                                : 'bg-slate-100 text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600'
+                                            }`}
+                                    >
+                                        <img
+                                            className="w-5 h-5"
+                                            src={assets.person_tick_icon}
+                                            alt="View Applications"
+                                        />
+                                    </div>
+
+                                    <p className="ml-3 font-medium text-sm lg:text-base max-sm:hidden transition-colors duration-300 group-hover:text-slate-900">
+                                        View Applications
+                                    </p>
+                                </div>
+                            )}
+                        </NavLink>
+
                 </ul>
             </div>
 
