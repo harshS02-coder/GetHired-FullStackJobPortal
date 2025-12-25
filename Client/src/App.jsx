@@ -12,6 +12,8 @@ import ManageJobs from './pages/ManageJobs';
 import ViewApplication from './pages/ViewApplication';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import CompanyProtectedRoute from './components/auth/CompanyProtectedRoute';
+import { Navigate } from 'react-router-dom';
 import 'quill/dist/quill.snow.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -33,12 +35,20 @@ const App = () =>{
             element={<ForgotPassword />}
           />
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
-        <Route path='/dashboard' element={<Dashboard/>}>
+        {/* <Route path='/dashboard' element={<Dashboard/>}>
           {companyToken ? <>
             <Route path='addJobs' element={<AddJobs/>} />
           <Route path='manageJobs' element={<ManageJobs/>} />
           <Route path='viewApplications' element={<ViewApplication/>} />
           </> : null }
+        </Route> */}
+        <Route element={<CompanyProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />}>
+            {/* <Route index element={<Navigate to="addJobs" replace />} /> */}
+            <Route path="addJobs" element={<AddJobs />} />
+            <Route path="manageJobs" element={<ManageJobs />} />
+            <Route path="viewApplications" element={<ViewApplication />} />
+          </Route>
         </Route>
       </Routes>
     </div>
