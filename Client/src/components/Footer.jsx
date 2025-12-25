@@ -185,8 +185,8 @@ const Footer = () => {
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl blur opacity-20"></div>
               <img 
-                src={assets.getHired} 
-                className="relative h-8 sm:h-10 md:h-12 object-contain filter brightness-0 invert"
+                src="./getHired.png"
+                className="relative h-8 sm:h-10 md:h-12 object-contain"
                 style={{
                   maxWidth: '180px',
                   minHeight: '32px'

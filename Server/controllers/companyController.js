@@ -5,6 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 import generateToken from "../utils/generateToken.js";
 import { promises } from "fs";
 import Application from '../models/JobApplications.js'
+import { uploadToCloudinary } from "../utils/cloudinaryUpload.js";
 import User from '../models/Users.js'
 import crypto from 'crypto'
 import dotenv from 'dotenv'
@@ -30,7 +31,8 @@ export const registerCompany = async (req, res) => {
         const round = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(password, round);
 
-        const imageUpload = await cloudinary.uploader.upload(imageFile.path);
+        // const imageUpload = await cloudinary.uploader.upload(imageFile.path);
+        const imageUpload = await uploadToCloudinary(imageFile.buffer);
 
         const company = await Company.create({
             name,
