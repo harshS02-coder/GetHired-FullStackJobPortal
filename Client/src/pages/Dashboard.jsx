@@ -1,6 +1,6 @@
 //dashboard
 
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import NavBar from '../components/NavBar';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
@@ -12,6 +12,23 @@ const Dashboard = () => {
     const navigate = useNavigate()
 
     const { companyData, setCompanyToken, setCompanyData } = useContext(AppContext)
+
+    // dropdown hover intent state
+    const [menuOpen, setMenuOpen] = useState(false)
+    const closeTimer = useRef(null)
+
+    const openMenu = () => {
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current)
+            closeTimer.current = null
+        }
+        setMenuOpen(true)
+    }
+
+    const scheduleCloseMenu = () => {
+        if (closeTimer.current) clearTimeout(closeTimer.current)
+        closeTimer.current = setTimeout(() => setMenuOpen(false), 200)
+    }
 
     //function for logging out
     const logout = async () => {
@@ -111,7 +128,11 @@ const Dashboard = () => {
                             <p className='max-sm:hidden mr-0 text-slate-700 font-medium bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent'>
                                 Welcome, {companyData.name}
                             </p>
-                            <div className='relative group'>
+                            <div
+                                className='relative group'
+                                onMouseEnter={openMenu}
+                                onMouseLeave={scheduleCloseMenu}
+                            >
                                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
                                 <img
                                     className='relative w-10 h-10 border-2 border-white rounded-full shadow-lg transform group-hover:scale-110 transition-transform duration-300'
@@ -119,7 +140,11 @@ const Dashboard = () => {
                                     alt={companyData.name}
                                 />
                                 {/* Dropdown Menu */}
-                                <div className='absolute hidden group-hover:block top-full right-0 z-50 mt-2 min-w-[120px]'>
+                                <div
+                                    className={`absolute ${menuOpen ? 'block' : 'hidden'} top-full right-0 z-50 mt-2 min-w-[120px]`}
+                                    onMouseEnter={openMenu}
+                                    onMouseLeave={scheduleCloseMenu}
+                                >
                                     <div className='bg-white/90 backdrop-blur-xl rounded-xl shadow-2xl border border-white/60 p-2'>
                                         <ul className='list-none m-0'>
                                             <li
